@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { MenuInterface } from "@/components/app/types";
-import { web_route } from "@/utils/webConfig";
+import type { MenuInterface } from '@/components/app/types'
+import { web_route } from '@/utils/webConfig'
 
 const menu: MenuInterface[] = [
-  { title: "Wallet", url: web_route.wallet },
-  { title: "Withdraw", url: web_route.withdraw },
-];
+  { title: 'Wallet', url: web_route.wallet },
+  { title: 'Withdraw', url: web_route.withdraw },
+]
 </script>
 
 <template>

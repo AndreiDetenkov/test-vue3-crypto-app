@@ -2,7 +2,7 @@
 
 <template>
   <div class="main-container">
-    <h1>Home View</h1>
+    <h2>withdraw details</h2>
   </div>
 </template>
 

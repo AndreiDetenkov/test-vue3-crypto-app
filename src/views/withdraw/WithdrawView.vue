@@ -2,8 +2,10 @@
 
 <template>
   <div class="main-container">
-    <h1>Home View</h1>
+    <h1>withdraw view</h1>
   </div>
+
+  <router-view />
 </template>
 
 <style scoped lang="scss"></style>

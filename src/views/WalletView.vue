@@ -7,7 +7,7 @@ import UserBalance from '@/components/user/UserBalance.vue'
 
 const walletStore = useWalletStore()
 
-onMounted(() => {
+onMounted((): void => {
   walletStore.fetchWalletData()
 })
 </script>

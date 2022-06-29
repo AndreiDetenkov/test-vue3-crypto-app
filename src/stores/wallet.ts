@@ -8,7 +8,7 @@ interface RootState {
 
 export const useWalletStore = defineStore('wallet', {
   state: (): RootState => ({
-    walletData: [],
+    walletData: [] as WalletData[],
   }),
   actions: {
     async fetchWalletData(): Promise<void> {

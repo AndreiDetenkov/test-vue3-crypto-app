@@ -1,5 +1,6 @@
 [
   {
+    "id": "0036d706-407a-4536-8e17-7daf84c6d710",
     "title": "TetherUS",
     "short": "Usdt",
     "icon": "usdt.svg",
@@ -9,6 +10,7 @@
     "usdValue": "35.01"
   },
   {
+    "id": "182e7814-23f7-4627-8022-5401f5576a7e",
     "title": "Solana",
     "short": "Sol",
     "icon": "sol.svg",
@@ -18,6 +20,7 @@
     "usdValue": "0.029964"
   },
   {
+    "id": "2dc344e2-e032-4267-80f1-c7132966b703",
     "title": "Bitcoin",
     "short": "Btc",
     "icon": "btc.svg",
@@ -27,6 +30,7 @@
     "usdValue": "0.006884"
   },
   {
+    "id": "1ec627b4-0273-4705-8f7a-5bd72d4d2b03",
     "title": "1inch",
     "short": "1inch",
     "icon": "1inch.svg",
@@ -36,6 +40,7 @@
     "usdValue": "0.005061"
   },
   {
+    "id": "53814a07-37b6-45a9-ae91-369d5d980113",
     "title": "Ethereum",
     "short": "Eth",
     "icon": "eth.svg",
@@ -45,6 +50,7 @@
     "usdValue": "0.004049"
   },
   {
+    "id": "7680beda-d8a4-4323-ae01-a9b52a4e49e2",
     "title": "Waves",
     "short": "Waves",
     "icon": "waves.svg",
@@ -54,6 +60,7 @@
     "usdValue": "0.003847"
   },
   {
+    "id": "019c6ba6-bcfd-45f8-a615-391aaf57df1e",
     "title": "Cardano",
     "short": "Ada",
     "icon": "ada.svg",
@@ -63,6 +70,7 @@
     "usdValue": "0.002834"
   },
   {
+    "id": "f301c1c5-2f7a-4f87-94d9-6270fd0a947e",
     "title": "Bnb",
     "short": "Bnb",
     "icon": "bnb.svg",

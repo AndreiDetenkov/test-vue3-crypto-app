@@ -2,12 +2,12 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import type { UserData } from '@/components/user/types'
 
-interface RootState {
+interface UserState {
   userData: UserData
 }
 
 export const useUserStore = defineStore('user', {
-  state: (): RootState => ({
+  state: (): UserState => ({
     userData: {} as UserData,
   }),
   actions: {

@@ -3,73 +3,73 @@
     "title": "TetherUS",
     "short": "Usdt",
     "icon": "usdt.svg",
-    "total": 35.0170622,
-    "available": 35.0170622,
-    "btcValue": 0.00172389,
-    "usdValue": 35.01
+    "total": "35.0170622",
+    "available": "35.0170622",
+    "btcValue": "0.00172389",
+    "usdValue": "35.01"
   },
   {
     "title": "Solana",
     "short": "Sol",
     "icon": "sol.svg",
-    "total": 0.00084600,
-    "available": 0.00084600,
-    "btcValue": 0.00000148,
-    "usdValue": 0.029964
+    "total": "0.00084600",
+    "available": "0.00084600",
+    "btcValue": "0.00000148",
+    "usdValue": "0.029964"
   },
   {
     "title": "Bitcoin",
     "short": "Btc",
     "icon": "btc.svg",
-    "total": 0.00000034,
-    "available": 0.00000034,
-    "btcValue": 0.00000034,
-    "usdValue": 0.006884
+    "total": "0.00000034",
+    "available": "0.00000034",
+    "btcValue": "0.00000034",
+    "usdValue": "0.006884"
   },
   {
     "title": "1inch",
     "short": "1inch",
     "icon": "1inch.svg",
-    "total": 0.00084600,
-    "available": 0.00084600,
-    "btcValue": 0.00000148,
-    "usdValue": 0.005061
+    "total": "0.00084600",
+    "available": "0.00084600",
+    "btcValue": "0.00000148",
+    "usdValue": "0.005061"
   },
   {
     "title": "Ethereum",
     "short": "Eth",
     "icon": "eth.svg",
-    "total": 0.00000358,
-    "available": 0.00000358,
-    "btcValue": 0.00000020,
-    "usdValue": 0.004049
+    "total": "0.00000358",
+    "available": "0.00000358",
+    "btcValue": "0.00000020",
+    "usdValue": "0.004049"
   },
   {
     "title": "Waves",
     "short": "Waves",
     "icon": "waves.svg",
-    "total": 0.00070500,
-    "available": 0.00070500,
-    "btcValue": 0.00000019,
-    "usdValue": 0.003847
+    "total": "0.00070500",
+    "available": "0.00070500",
+    "btcValue": "0.00000019",
+    "usdValue": "0.003847"
   },
   {
     "title": "Cardano",
     "short": "Ada",
     "icon": "ada.svg",
-    "total": 0.00587000,
-    "available": 0.00587000,
-    "btcValue": 0.00000014,
-    "usdValue": 0.002834
+    "total": "0.00587000",
+    "available": "0.00587000",
+    "btcValue": "0.00000014",
+    "usdValue": "0.002834"
   },
   {
     "title": "Bnb",
     "short": "Bnb",
     "icon": "bnb.svg",
-    "total": 0.00000000,
-    "available": 0.00000000,
-    "btcValue": 0.00000000,
-    "usdValue": 0.00000000
+    "total": "0.00000000",
+    "available": "0.00000000",
+    "btcValue": "0.00000000",
+    "usdValue": "0.00000000"
   }
 ]
 

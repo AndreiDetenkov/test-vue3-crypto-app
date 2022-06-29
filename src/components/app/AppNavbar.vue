@@ -2,18 +2,13 @@
 import type { MenuInterface } from '@/components/app/types'
 import { web_route } from '@/utils/webConfig'
 
-const menu: MenuInterface[] = [
-  { title: 'Wallet', url: web_route.wallet },
-  { title: 'Withdraw', url: web_route.withdraw },
-]
+const menu: MenuInterface[] = [{ title: 'Wallet', url: web_route.wallet }]
 </script>
 
 <template>
   <nav class="nav">
     <div class="nav__container">
-      <router-link to="/" class="logo">
-        <img src="@/assets/logo.svg" alt="logo" />
-      </router-link>
+      <router-link to="/" class="logo"> Logo </router-link>
 
       <div class="menu">
         <router-link

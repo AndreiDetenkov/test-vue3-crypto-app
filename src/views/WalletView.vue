@@ -19,6 +19,8 @@ onMounted(() => {
       <p>0.00172543 BTC <span>≈ $35.01</span></p>
     </div>
 
+    <hr />
+
     <wallet-table />
   </div>
 </template>

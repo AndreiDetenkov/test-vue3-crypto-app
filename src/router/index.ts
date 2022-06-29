@@ -16,19 +16,20 @@ const router = createRouter({
     },
     {
       path: '/withdraw',
-      component: () => import('@/views/withdraw/WithdrawView.vue'),
+      component: () => import('@/views/withdraw/WithdrawalView.vue'),
       children: [
         {
           path: 'details',
-          component: () => import('@/views/withdraw/WithdrawDetails.vue'),
+          component: () => import('@/views/withdraw/WithdrawalDetails.vue'),
         },
         {
           path: 'confirmation',
-          component: () => import('@/views/withdraw/WithdrawConfirmation.vue'),
+          component: () =>
+            import('@/views/withdraw/WithdrawalConfirmation.vue'),
         },
         {
           path: 'result',
-          component: () => import('@/views/withdraw/WithdrawResult.vue'),
+          component: () => import('@/views/withdraw/WithdrawalResult.vue'),
         },
       ],
     },

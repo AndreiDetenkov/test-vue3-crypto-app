@@ -16,7 +16,7 @@ defineProps<{
 </script>
 
 <template>
-  <table class="w-full table-fixed border border-collapse">
+  <table class="w-full table-fixed border-collapse">
     <thead class="bg-gray-100">
       <tr class="h-11">
         <th
@@ -29,7 +29,11 @@ defineProps<{
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in walletData" :key="item.id" class="border-b h-16">
+      <tr
+        v-for="item in walletData"
+        :key="item.id"
+        class="border-b h-16 hover:bg-gray-100"
+      >
         <td class="h-16 px-4 flex items-center">
           <img
             :src="`src/assets/icons/${item.icon}`"

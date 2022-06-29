@@ -27,8 +27,6 @@ const filteredWalletData = computed<WalletData[]>(() => {
 </script>
 
 <template>
-  <hr />
-
   <form @submit.prevent>
     <input
       v-model="search"
@@ -76,10 +74,13 @@ const filteredWalletData = computed<WalletData[]>(() => {
           </td>
           <td>
             <router-link
-              :to="web_route.withdraw"
-              class="text-accent font-medium"
-              >Withdraw</router-link
+              :to="item.available > 0 ? web_route.withdraw : ''"
+              class="font-medium"
+              :class="[item.available > 0 ? 'text-accent' : 'disabled']"
+              disabled
             >
+              Withdraw
+            </router-link>
           </td>
         </tr>
       </tbody>
@@ -87,4 +88,8 @@ const filteredWalletData = computed<WalletData[]>(() => {
   </form>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.disabled {
+  @apply text-gray-400;
+}
+</style>

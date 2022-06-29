@@ -2,6 +2,7 @@
 import { useWalletStore } from '@/stores/wallet'
 import { onMounted } from 'vue'
 import WalletTable from '@/components/wallet/WalletTable.vue'
+import AppPageTitle from '@/components/app/AppPageTitle.vue'
 
 const walletStore = useWalletStore()
 
@@ -12,7 +13,7 @@ onMounted(() => {
 
 <template>
   <div class="main-container">
-    <h1>Wallet Overview</h1>
+    <app-page-title>Wallet Overview</app-page-title>
 
     <div>
       <span>Estimated Balance</span>

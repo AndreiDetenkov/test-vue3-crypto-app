@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { web_route } from '@/utils/webConfig'
 import type { WalletData } from '@/components/wallet/types'
+import { computed, ref } from 'vue'
+import { useWalletStore } from '@/stores/wallet'
+import { storeToRefs } from 'pinia'
 
 const tableHeaders: string[] = [
   'Coin',
@@ -10,12 +13,31 @@ const tableHeaders: string[] = [
   'Action',
 ]
 
-defineProps<{
-  walletData: WalletData[]
-}>()
+const walletStore = useWalletStore()
+const { walletData } = storeToRefs(walletStore)
+
+const search = ref<string>('')
+const localData = ref(walletData)
+
+const filteredWalletData = computed<WalletData[]>(() => {
+  return localData.value.filter((item) =>
+    item.title.toLowerCase().includes(search.value.toLowerCase())
+  )
+})
 </script>
 
 <template>
+  <hr />
+
+  <form class="my-4" @submit.prevent>
+    <input
+      v-model="search"
+      placeholder="Search Coin"
+      type="text"
+      class="form-input w-full md:w-2/6 xl:w-1/6 border border-gray-200 rounded"
+    />
+  </form>
+
   <table class="w-full table-fixed border-collapse">
     <thead class="bg-gray-100">
       <tr class="h-11">
@@ -30,7 +52,7 @@ defineProps<{
     </thead>
     <tbody>
       <tr
-        v-for="item in walletData"
+        v-for="item in filteredWalletData"
         :key="item.id"
         class="border-b h-16 hover:bg-gray-100"
       >

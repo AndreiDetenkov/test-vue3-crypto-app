@@ -3,6 +3,7 @@ import { useWalletStore } from '@/stores/wallet'
 import { onMounted } from 'vue'
 import WalletTable from '@/components/wallet/WalletTable.vue'
 import AppPageTitle from '@/components/app/AppPageTitle.vue'
+import UserBalance from '@/components/user/UserBalance.vue'
 
 const walletStore = useWalletStore()
 
@@ -14,16 +15,8 @@ onMounted(() => {
 <template>
   <div class="main-container">
     <app-page-title>Wallet Overview</app-page-title>
-
-    <div>
-      <span>Estimated Balance</span>
-      <p>0.00172543 BTC <span>≈ $35.01</span></p>
-    </div>
-
+    <user-balance />
     <hr />
-
     <wallet-table />
   </div>
 </template>
-
-<style scoped lang="scss"></style>

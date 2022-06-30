@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useWalletStore } from '@/stores/wallet'
 import { onMounted } from 'vue'
-import WalletTable from '@/components/wallet/WalletTable.vue'
+import WalletForm from '@/components/wallet/WalletForm.vue'
 import AppPageTitle from '@/components/app/AppPageTitle.vue'
 import UserBalance from '@/components/user/UserBalance.vue'
 
@@ -17,6 +17,6 @@ onMounted((): void => {
     <app-page-title>Wallet Overview</app-page-title>
     <user-balance />
     <hr />
-    <wallet-table />
+    <wallet-form />
   </div>
 </template>

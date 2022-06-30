@@ -1,94 +1,113 @@
 <script setup lang="ts">
+import { COIN_ICONS_PATH } from '@/utils/consts'
+import { TABLE_HEADERS } from '@/components/wallet/utils'
 import { web_route } from '@/utils/webConfig'
 import type { WalletData } from '@/components/wallet/types'
-import { computed, ref } from 'vue'
 import { useWalletStore } from '@/stores/wallet'
-import { storeToRefs } from 'pinia'
 
-const tableHeaders: string[] = [
-  'Coin',
-  'Total',
-  'Available',
-  'BTC Value',
-  'Action',
-]
+defineProps<{
+  tableItems: WalletData[]
+}>()
 
 const walletStore = useWalletStore()
-const { walletData } = storeToRefs(walletStore)
 
-const search = ref<string>('')
-const localData = ref(walletData)
-
-const filteredWalletData = computed<WalletData[]>(() => {
-  return localData.value.filter((item) =>
-    item.title.toLowerCase().includes(search.value.toLowerCase())
-  )
-})
+const setCoin = (coin: WalletData): void => {
+  walletStore.setWalletCoin(coin)
+}
 </script>
 
 <template>
-  <form @submit.prevent>
-    <input
-      v-model="search"
-      placeholder="Search Coin"
-      type="text"
-      class="form-input w-full md:w-2/6 xl:w-1/6 border border-gray-200 rounded my-4"
-    />
-
-    <table class="w-full table-fixed border-collapse">
-      <thead class="bg-gray-100">
-        <tr class="h-11">
-          <th
-            v-for="header in tableHeaders"
-            :key="header"
-            class="text-left text-sm text-gray-500 font-medium first:pl-4"
+  <table class="table">
+    <thead class="table__header">
+      <tr class="header-row">
+        <th v-for="header in TABLE_HEADERS" :key="header" class="header-col">
+          {{ header }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="item in tableItems" :key="item.id" class="body-row">
+        <td class="col-first">
+          <img
+            :src="`${COIN_ICONS_PATH}/${item.icon}`"
+            alt="cryptocurrency icon"
+            class="col-first__img"
+          />
+          <div class="coin">
+            <span class="coin__short">{{ item.short }}</span>
+            <span class="coin__title">{{ item.title }}</span>
+          </div>
+        </td>
+        <td>{{ item.total }}</td>
+        <td>{{ item.available }}</td>
+        <td>
+          <div>{{ item.btcValue }}</div>
+          <div v-if="item.usdValue > 0" class="usd-value">
+            ≈ ${{ item.usdValue }}
+          </div>
+        </td>
+        <td>
+          <router-link
+            :to="item.available > 0 ? web_route.withdraw : ''"
+            :class="[item.available > 0 ? 'text-accent' : 'disabled']"
+            class="font-medium"
+            disabled
           >
-            {{ header }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="item in filteredWalletData"
-          :key="item.id"
-          class="border-b h-16 hover:bg-gray-100"
-        >
-          <td class="h-16 px-4 flex items-center">
-            <img
-              :src="`src/assets/icons/${item.icon}`"
-              alt="cryptocurrency icon"
-              class="w-8 h-8"
-            />
-            <div class="flex flex-col pl-4">
-              <span class="font-bold uppercase">{{ item.short }}</span>
-              <span class="text-sm text-gray-500">{{ item.title }}</span>
-            </div>
-          </td>
-          <td>{{ item.total }}</td>
-          <td>{{ item.available }}</td>
-          <td class="">
-            <div>{{ item.btcValue }}</div>
-            <div v-if="item.usdValue > 0" class="text-sm text-gray-500">
-              ≈ ${{ item.usdValue }}
-            </div>
-          </td>
-          <td>
-            <router-link
-              :to="item.available > 0 ? web_route.withdraw : ''"
-              class="font-medium"
-              :class="[item.available > 0 ? 'text-accent' : 'disabled']"
-              disabled
-            >
-              Withdraw
-            </router-link>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </form>
+            <span @click="setCoin(item)">Withdraw</span>
+          </router-link>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <style scoped lang="scss">
+.table {
+  @apply w-full table-fixed border-collapse;
+
+  &__header {
+    @apply bg-gray-100;
+  }
+}
+
+.header {
+  &-row {
+    @apply h-11;
+  }
+  &-col {
+    @apply text-left text-sm text-gray-500 font-medium first:pl-4;
+  }
+}
+
+.body {
+  &-row {
+    @apply border-b h-16 hover:bg-gray-100;
+  }
+}
+
+.col-first {
+  @apply h-16 px-4 flex items-center;
+
+  &__img {
+    @apply w-8 h-8;
+  }
+}
+
+.coin {
+  @apply flex flex-col pl-4;
+
+  &__short {
+    @apply font-bold uppercase;
+  }
+  &__title {
+    @apply text-sm text-gray-500;
+  }
+}
+
+.usd-value {
+  @apply text-sm text-gray-500;
+}
+
 .disabled {
   @apply text-gray-400;
 }

@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import type { MenuInterface } from '@/components/app/types'
 import { web_route } from '@/utils/webConfig'
+import WalletIcon from '@/components/wallet/WalletIcon.vue'
 
-const menu: MenuInterface[] = [{ title: 'Wallet', url: web_route.wallet }]
+const menu: MenuInterface[] = [
+  { title: 'Wallets', url: web_route.wallet, icon: 'wallet.svg' },
+]
 </script>
 
 <template>
@@ -18,6 +21,7 @@ const menu: MenuInterface[] = [{ title: 'Wallet', url: web_route.wallet }]
           class="menu__link"
           active-class="active"
         >
+          <wallet-icon class="menu__icon" />
           {{ item.title }}
         </router-link>
       </div>
@@ -30,7 +34,7 @@ const menu: MenuInterface[] = [{ title: 'Wallet', url: web_route.wallet }]
   @apply h-16 bg-primary flex items-center;
 
   &__container {
-    @apply container mx-auto flex items-center justify-between;
+    @apply container mx-auto flex items-center justify-between px-4;
   }
 }
 
@@ -42,14 +46,17 @@ const menu: MenuInterface[] = [{ title: 'Wallet', url: web_route.wallet }]
   @apply flex justify-center;
 
   &__link {
-    @apply h-8 px-4 mx-2
-    flex items-center justify-center
-    text-gray-300 text-center uppercase text-sm
+    @apply h-16 px-4 mx-2 flex items-center justify-center
+    text-gray-300 text-center uppercase text-sm font-medium
     transition duration-300 ease-in-out;
+  }
+
+  &__icon {
+    @apply fill-default/[.33] mr-2 w-6 h-6;
   }
 }
 
 .active {
-  @apply text-accent font-bold border-b-accent border-b-2;
+  @apply text-accent font-bold border-b-accent bg-amber-400/10;
 }
 </style>

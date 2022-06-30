@@ -3,17 +3,13 @@ import { COIN_ICONS_PATH } from '@/utils/consts'
 import { TABLE_HEADERS } from '@/components/wallet/utils'
 import { web_route } from '@/utils/webConfig'
 import type { WalletData } from '@/components/wallet/types'
-import { useWalletStore } from '@/stores/wallet'
+import useCoin from '@/composables/useCoin'
 
 defineProps<{
   tableItems: WalletData[]
 }>()
 
-const walletStore = useWalletStore()
-
-const setCoin = (coin: WalletData): void => {
-  walletStore.setWalletCoin(coin)
-}
+const { setCoin } = useCoin()
 </script>
 
 <template>

@@ -4,12 +4,15 @@ import type { WalletData } from '@/components/wallet/types'
 
 interface WalletState {
   walletData: WalletData[]
+  walletCoin: WalletData
 }
 
 export const useWalletStore = defineStore('wallet', {
-  state: (): WalletState => ({
-    walletData: [] as WalletData[],
-  }),
+  state: () =>
+    <WalletState>{
+      walletData: [] as WalletData[],
+      walletCoin: {} as WalletData,
+    },
   actions: {
     async fetchWalletData(): Promise<void> {
       try {
@@ -18,6 +21,9 @@ export const useWalletStore = defineStore('wallet', {
       } catch (error) {
         throw new Error()
       }
+    },
+    setWalletCoin(coin: WalletData): void {
+      this.walletCoin = coin
     },
   },
 })

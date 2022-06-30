@@ -12,7 +12,7 @@ const router = createRouter({
     {
       path: '/wallet',
       name: 'wallet',
-      component: () => import('@/views/WalletView.vue'),
+      component: () => import('@/views/wallet/WalletView.vue'),
     },
     {
       path: '/withdraw',
@@ -20,16 +20,18 @@ const router = createRouter({
       children: [
         {
           path: 'details',
-          component: () => import('@/views/withdraw/WithdrawalDetails.vue'),
+          component: () =>
+            import('@/views/withdraw/steps/WithdrawalDetails.vue'),
         },
         {
           path: 'confirmation',
           component: () =>
-            import('@/views/withdraw/WithdrawalConfirmation.vue'),
+            import('@/views/withdraw/steps/WithdrawalConfirmation.vue'),
         },
         {
           path: 'result',
-          component: () => import('@/views/withdraw/WithdrawalResult.vue'),
+          component: () =>
+            import('@/views/withdraw/steps/WithdrawalResult.vue'),
         },
       ],
     },

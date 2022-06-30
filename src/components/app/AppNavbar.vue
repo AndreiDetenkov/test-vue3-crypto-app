@@ -4,7 +4,7 @@ import { web_route } from '@/utils/webConfig'
 import WalletIcon from '@/components/wallet/WalletIcon.vue'
 
 const menu: MenuInterface[] = [
-  { title: 'Wallets', url: web_route.wallet, icon: 'wallet.svg' },
+  { title: 'Wallet', url: web_route.wallet, icon: 'wallet.svg' },
 ]
 </script>
 

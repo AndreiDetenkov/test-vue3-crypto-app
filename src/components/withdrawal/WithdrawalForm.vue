@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { computed, reactive } from 'vue'
+import { computed, reactive, watch } from 'vue'
+import { storeToRefs } from 'pinia'
 import { required } from '@vuelidate/validators'
 import useValidate from '@vuelidate/core'
+import { useWalletStore } from '@/stores/wallet'
 import type {
   FormRules,
   NetworkOption,
@@ -12,8 +14,6 @@ import AppSelect from '@/components/app/AppSelect.vue'
 import AppTextarea from '@/components/app/AppTextarea.vue'
 import AppRuleError from '@/components/app/AppRuleError.vue'
 import WithdrawalAdditionalInfo from '@/components/withdrawal/WithdrawalAdditionalInfo.vue'
-import { useWalletStore } from '@/stores/wallet'
-import { storeToRefs } from 'pinia'
 import WithdrawalMaxAmountBtn from '@/components/withdrawal/WithdrawalMaxAmountBtn.vue'
 
 const walletStore = useWalletStore()
@@ -26,12 +26,28 @@ const formData = reactive<WithdrawFormData>({
   comment: '',
 })
 
+watch(
+  () => walletCoin.value.title,
+  (newVal, prevVal) => {
+    if (newVal.toString() !== prevVal.toString()) formData.amount = ''
+  }
+)
+
 const rules = computed<FormRules>(() => {
   return {
     address: { required },
     network: { required },
     amount: { required },
   }
+})
+
+const networkOptions = computed<NetworkOption[]>(() => {
+  return walletCoin.value.network.map((item) => {
+    return {
+      value: item.value,
+      title: item.title + ` - fee: ${item.fee} ( ≈ $${item.usdFee})`,
+    }
+  })
 })
 
 const v$ = useValidate(rules, formData)
@@ -44,15 +60,6 @@ const onSubmit = async () => {
 const setMaxAmount = () => {
   formData.amount = walletCoin.value.total
 }
-
-const networkOptions = computed<NetworkOption[]>(() => {
-  return walletCoin.value.network.map((item) => {
-    return {
-      value: item.value,
-      title: item.title + ` - fee: ${item.fee} ( ≈ $${item.usdFee})`,
-    }
-  })
-})
 </script>
 
 <template>

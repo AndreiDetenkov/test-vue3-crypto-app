@@ -3,3 +3,8 @@ export interface MenuInterface {
   url: string
   icon: string
 }
+
+export interface SelectOption {
+  title: string
+  value: string
+}

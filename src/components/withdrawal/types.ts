@@ -4,3 +4,5 @@ export interface WithdrawFormData {
   amount: string
   comment: string
 }
+
+export type FormRules = { [key: string]: any }

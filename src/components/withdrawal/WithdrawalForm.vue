@@ -9,7 +9,7 @@ import AppTextarea from '@/components/app/AppTextarea.vue'
 import AppRuleError from '@/components/app/AppRuleError.vue'
 
 const formData = reactive<WithdrawFormData>({
-  address: '',
+  address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
   network: '',
   amount: '',
   comment: '',
@@ -51,11 +51,11 @@ const onSubmit = async () => {
     <app-textarea
       v-model="formData.comment"
       label="Comment"
-      placeholder="Please enter comment"
+      placeholder="Optional"
       rows="4"
     />
 
-    <fieldset v-show="formData.address">
+    <fieldset>
       <app-input
         v-model.number="formData.amount"
         label="Amount"
@@ -70,6 +70,6 @@ const onSubmit = async () => {
 
 <style scoped>
 .submit-btn {
-  @apply bg-primary text-gray-300 font-bold py-2 px-4 rounded hover:bg-primary/90 hover:text-accent transition duration-300 ease-in-out;
+  @apply bg-primary text-gray-300 font-bold py-2 px-4 rounded hover:bg-primary/90 hover:text-accent transition duration-500 ease-in-out;
 }
 </style>

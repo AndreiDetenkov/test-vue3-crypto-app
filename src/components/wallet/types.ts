@@ -7,4 +7,14 @@ export interface WalletData {
   available: string
   btcValue: string
   usdValue: string
+  minimalWithdraw: string
+  fee: string
+  network: NetworkData[]
+}
+
+interface NetworkData {
+  title: string
+  value: string
+  fee: string
+  usdFee: string
 }

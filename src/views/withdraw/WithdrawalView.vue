@@ -5,7 +5,7 @@ import { useStorage } from '@vueuse/core'
 import { useWalletStore } from '@/stores/wallet'
 import AppPageTitle from '@/components/app/AppPageTitle.vue'
 import WithdrawalList from '@/components/withdrawal/WithdrawalList.vue'
-import WithdrawalCoinInfo from '@/components/withdrawal/withdrawalCoinInfo.vue'
+import WithdrawalCoinInfo from '@/components/withdrawal/WithdrawalCoinInfo.vue'
 import WithdrawalForm from '@/components/withdrawal/WithdrawalForm.vue'
 
 onBeforeMount((): void => {
@@ -30,7 +30,7 @@ const coin = useStorage('coin', walletCoin)
       <section class="flex-1 border p-6">
         <withdrawal-coin-info :coin="coin" />
 
-        <withdrawal-form class="max-w-screen-xl w-2/4 mx-auto" />
+        <withdrawal-form :coin="coin" class="max-w-screen-xl w-2/4 mx-auto" />
       </section>
     </div>
   </section>

@@ -6,3 +6,8 @@ export interface WithdrawFormData {
 }
 
 export type FormRules = { [key: string]: any }
+
+export interface NetworkOption {
+  title: string
+  value: string
+}

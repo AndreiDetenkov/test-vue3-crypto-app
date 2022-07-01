@@ -19,7 +19,7 @@ defineProps<{
         {{ coin.title }}
       </span>
     </div>
-    <div class="text-gray-500 font-medium">
+    <div class="text-gray-600 font-medium">
       Available balance: {{ coin.available }}
       <span class="uppercase font-medium">{{ coin.short }}</span>
     </div>

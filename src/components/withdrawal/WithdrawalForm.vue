@@ -2,11 +2,20 @@
 import { computed, reactive } from 'vue'
 import { required } from '@vuelidate/validators'
 import useValidate from '@vuelidate/core'
-import type { FormRules, WithdrawFormData } from '@/components/withdrawal/types'
+import type {
+  FormRules,
+  NetworkOption,
+  WithdrawFormData,
+} from '@/components/withdrawal/types'
 import AppInput from '@/components/app/AppInput.vue'
 import AppSelect from '@/components/app/AppSelect.vue'
 import AppTextarea from '@/components/app/AppTextarea.vue'
 import AppRuleError from '@/components/app/AppRuleError.vue'
+import type { WalletData } from '@/components/wallet/types'
+
+const props = defineProps<{
+  coin: WalletData
+}>()
 
 const formData = reactive<WithdrawFormData>({
   address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
@@ -29,6 +38,15 @@ const onSubmit = async () => {
   const result = await v$.value.$validate()
   if (result) console.log('success')
 }
+
+const networkOptions = computed<NetworkOption[]>(() => {
+  return props.coin.network.map((item) => {
+    return {
+      value: item.value,
+      title: item.title + ` - fee: ${item.fee} ( ≈ $${item.usdFee})`,
+    }
+  })
+})
 </script>
 
 <template>
@@ -44,15 +62,38 @@ const onSubmit = async () => {
     </fieldset>
 
     <fieldset>
-      <app-select v-model="formData.network" :options="[]" label="Network" />
+      <app-select
+        v-model="formData.network"
+        :options="networkOptions"
+        label="Network"
+      />
       <app-rule-error :errors="v$.network.$errors" />
+
+      <div class="mt-2 flex">
+        <div class="flex flex-col w-1/2 text-sm">
+          <span class="text-gray-500 font-medium mb-1">Network fee</span>
+          <span class="font-bold text-gray-600">
+            {{ coin.fee }}
+            <span class="uppercase font-bold">{{ coin.short }}</span>
+          </span>
+        </div>
+        <div class="flex flex-col w-1/2 text-sm">
+          <span class="text-gray-500 font-medium mb-1">
+            Minimum withdrawal
+          </span>
+          <span class="font-bold text-gray-600">
+            {{ coin.minimalWithdraw }}
+            <span class="uppercase font-bold">{{ coin.short }}</span>
+          </span>
+        </div>
+      </div>
     </fieldset>
 
     <app-textarea
       v-model="formData.comment"
       label="Comment"
       placeholder="Optional"
-      rows="4"
+      rows="2"
     />
 
     <fieldset>

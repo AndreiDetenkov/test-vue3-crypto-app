@@ -1,72 +1,33 @@
 <script setup lang="ts">
-import AppPageTitle from '@/components/app/AppPageTitle.vue'
-import { useWalletStore } from '@/stores/wallet'
+import { onBeforeMount } from 'vue'
 import { storeToRefs } from 'pinia'
-import { COIN_ICONS_PATH } from '@/utils/consts'
-import useCoin from '@/composables/useCoin'
-import { onMounted } from 'vue'
+import { useWalletStore } from '@/stores/wallet'
+import AppPageTitle from '@/components/app/AppPageTitle.vue'
+import WithdrawalList from '@/components/withdrawal/WithdrawalList.vue'
+import WithdrawalCoinInfo from '@/components/withdrawal/withdrawalCoinInfo.vue'
+import { useStorage } from '@vueuse/core'
+
+onBeforeMount((): void => {
+  walletStore.fetchWalletData()
+})
 
 const walletStore = useWalletStore()
 const { walletCoin, walletData } = storeToRefs(walletStore)
 
-onMounted((): void => {
-  walletStore.fetchWalletData()
-})
-
-const { setCoin } = useCoin()
+const coin = useStorage('coin', walletCoin)
 </script>
 
 <template>
-  <div class="main-container">
+  <section class="main-container">
     <app-page-title>Withdraw Crypto</app-page-title>
 
     <div class="flex gap-8">
-      <div class="w-3/12 border py-6">
-        <div
-          v-for="data in walletData"
-          :key="data.id"
-          class="flex items-center hover:bg-gray-100 hover:cursor-pointer px-6 py-4"
-          @click="setCoin(data)"
-        >
-          <img
-            :src="`${COIN_ICONS_PATH}/${data.icon}`"
-            alt="coin icon"
-            class="w-8 h-8"
-          />
-          <div class="pl-4">
-            <span class="font-bold uppercase">{{ data.short }}</span> |
-            <span>{{ data.title }}</span>
-            <div class="font-medium text-gray-500">
-              Total: <span>{{ data.total }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <aside class="w-3/12 border py-6">
+        <withdrawal-list :wallet-coins="walletData" />
+      </aside>
 
-      <div class="flex-1 border p-6">
-        <div
-          class="flex items-center justify-between bg-gray-100 px-8 py-4 mb-12"
-        >
-          <template v-if="Object.keys(walletCoin).length">
-            <div class="flex items-center">
-              <img
-                :src="`${COIN_ICONS_PATH}/${walletCoin.icon}`"
-                alt="coin icon"
-                class="w-8 h-8"
-              />
-              <span class="pl-4 text-2xl font-bold">
-                {{ walletCoin.title }}
-              </span>
-            </div>
-            <div class="text-gray-500">
-              Available balance: {{ walletCoin.available }}
-              <span class="uppercase">{{ walletCoin.short }}</span>
-            </div>
-          </template>
-          <template v-else>
-            <span class="text-2xl">Please select coin</span>
-          </template>
-        </div>
+      <section class="flex-1 border p-6">
+        <withdrawal-coin-info :coin="coin" />
 
         <div class="flex justify-center">
           <form @submit.prevent class="w-3/4">
@@ -106,9 +67,12 @@ const { setCoin } = useCoin()
               </div>
               <div class="w-3/4">
                 <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  max="1000"
                   class="form-input border border-gray-200 rounded w-full py-2 px-4"
                   id="amount"
-                  type="text"
                 />
               </div>
             </div>
@@ -127,9 +91,9 @@ const { setCoin } = useCoin()
             </div>
           </form>
         </div>
-      </div>
+      </section>
     </div>
-  </div>
+  </section>
 
   <router-view />
 </template>

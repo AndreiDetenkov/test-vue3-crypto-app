@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useUserStore } from '@/stores/user'
-import { storeToRefs } from 'pinia'
+import type { UserData } from '@/components/user/types'
 
-const userStore = useUserStore()
-const { userData } = storeToRefs(userStore)
+defineProps<{
+  userData: UserData
+}>()
 </script>
 
 <template>

@@ -4,15 +4,17 @@ import { storeToRefs } from 'pinia'
 import { useWalletStore } from '@/stores/wallet'
 import type { WalletData } from '@/components/wallet/types'
 import WalletTable from '@/components/wallet/WalletTable.vue'
+import { useStorage } from '@vueuse/core'
 
 const walletStore = useWalletStore()
-const { walletData } = storeToRefs(walletStore)
+const { walletData, walletCoin } = storeToRefs(walletStore)
+
+useStorage('coin', walletCoin)
 
 const search = ref<string>('')
-const localData = ref(walletData)
 
 const filteredWalletData = computed<WalletData[]>(() => {
-  return localData.value.filter((item) =>
+  return walletData.value.filter((item) =>
     item.title.toLowerCase().includes(search.value.toLowerCase())
   )
 })

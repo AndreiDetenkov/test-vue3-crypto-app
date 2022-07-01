@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
+import type { WithdrawFormData } from '@/components/withdrawal/types'
 import AppInput from '@/components/app/AppInput.vue'
 import AppSelect from '@/components/app/AppSelect.vue'
 import AppTextarea from '@/components/app/AppTextarea.vue'
 
-const withdrawData = reactive({
+const formData = reactive<WithdrawFormData>({
   address: '',
   network: '',
   amount: '',
@@ -13,34 +14,28 @@ const withdrawData = reactive({
 </script>
 
 <template>
-  <form @submit.prevent class="w-2/4">
+  <form @submit.prevent class="flex flex-col gap-8">
     <app-input
-      v-model="withdrawData.address"
+      v-model="formData.address"
       label="Address"
       placeholder="Please enter valid address"
       :autocomplete="false"
-      class="mb-4"
     />
 
-    <app-select
-      v-model="withdrawData.network"
-      :options="[]"
-      label="Network"
-      class="mb-4"
+    <app-select v-model="formData.network" :options="[]" label="Network" />
+
+    <app-textarea
+      v-model="formData.comment"
+      label="Comment"
+      placeholder="Please enter comment"
+      rows="4"
     />
 
     <app-input
-      v-model.number="withdrawData.amount"
+      v-show="formData.address"
+      v-model.number="formData.amount"
       label="Amount"
       placeholder="Please enter amount"
-      class="mb-4"
-    />
-
-    <app-textarea
-      v-model="withdrawData.comment"
-      label="Comment"
-      placeholder="Please enter comment"
-      class="mb-4"
     />
   </form>
 </template>

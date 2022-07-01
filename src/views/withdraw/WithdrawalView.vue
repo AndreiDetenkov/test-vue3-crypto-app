@@ -30,7 +30,7 @@ const coin = useStorage('coin', walletCoin)
       <section class="flex-1 border p-6">
         <withdrawal-coin-info :coin="coin" />
 
-        <withdrawal-form :coin="coin" class="max-w-screen-xl w-2/4 mx-auto" />
+        <withdrawal-form class="max-w-screen-xl w-2/4 mx-auto" />
       </section>
     </div>
   </section>

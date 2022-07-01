@@ -11,11 +11,12 @@ import AppInput from '@/components/app/AppInput.vue'
 import AppSelect from '@/components/app/AppSelect.vue'
 import AppTextarea from '@/components/app/AppTextarea.vue'
 import AppRuleError from '@/components/app/AppRuleError.vue'
-import type { WalletData } from '@/components/wallet/types'
+import WithdrawalAdditionalInfo from '@/components/withdrawal/WithdrawalAdditionalInfo.vue'
+import { useWalletStore } from '@/stores/wallet'
+import { storeToRefs } from 'pinia'
 
-const props = defineProps<{
-  coin: WalletData
-}>()
+const walletStore = useWalletStore()
+const { walletCoin } = storeToRefs(walletStore)
 
 const formData = reactive<WithdrawFormData>({
   address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
@@ -40,7 +41,7 @@ const onSubmit = async () => {
 }
 
 const networkOptions = computed<NetworkOption[]>(() => {
-  return props.coin.network.map((item) => {
+  return walletCoin.value.network.map((item) => {
     return {
       value: item.value,
       title: item.title + ` - fee: ${item.fee} ( ≈ $${item.usdFee})`,
@@ -68,25 +69,7 @@ const networkOptions = computed<NetworkOption[]>(() => {
         label="Network"
       />
       <app-rule-error :errors="v$.network.$errors" />
-
-      <div class="mt-2 flex">
-        <div class="flex flex-col w-1/2 text-sm">
-          <span class="text-gray-500 font-medium mb-1">Network fee</span>
-          <span class="font-bold text-gray-600">
-            {{ coin.fee }}
-            <span class="uppercase font-bold">{{ coin.short }}</span>
-          </span>
-        </div>
-        <div class="flex flex-col w-1/2 text-sm">
-          <span class="text-gray-500 font-medium mb-1">
-            Minimum withdrawal
-          </span>
-          <span class="font-bold text-gray-600">
-            {{ coin.minimalWithdraw }}
-            <span class="uppercase font-bold">{{ coin.short }}</span>
-          </span>
-        </div>
-      </div>
+      <withdrawal-additional-info />
     </fieldset>
 
     <app-textarea

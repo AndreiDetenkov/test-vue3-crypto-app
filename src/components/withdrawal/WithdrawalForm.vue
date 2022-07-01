@@ -64,11 +64,12 @@ const onSubmit = async () => {
       <app-rule-error :errors="v$.amount.$errors" />
     </fieldset>
 
-    <button
-      type="submit"
-      class="bg-primary text-gray-300 font-bold py-2 px-4 rounded hover:bg-primary/90 hover:text-accent transition duration-300 ease-in-out;"
-    >
-      Withdraw
-    </button>
+    <button type="submit" class="submit-btn">Withdraw</button>
   </form>
 </template>
+
+<style scoped>
+.submit-btn {
+  @apply bg-primary text-gray-300 font-bold py-2 px-4 rounded hover:bg-primary/90 hover:text-accent transition duration-300 ease-in-out;
+}
+</style>

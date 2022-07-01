@@ -17,23 +17,6 @@ const router = createRouter({
     {
       path: '/withdraw',
       component: () => import('@/views/withdraw/WithdrawalView.vue'),
-      children: [
-        {
-          path: 'details',
-          component: () =>
-            import('@/views/withdraw/steps/WithdrawalDetails.vue'),
-        },
-        {
-          path: 'confirmation',
-          component: () =>
-            import('@/views/withdraw/steps/WithdrawalConfirmation.vue'),
-        },
-        {
-          path: 'result',
-          component: () =>
-            import('@/views/withdraw/steps/WithdrawalResult.vue'),
-        },
-      ],
     },
   ],
 })

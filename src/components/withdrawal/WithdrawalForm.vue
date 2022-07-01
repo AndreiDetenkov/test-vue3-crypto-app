@@ -14,6 +14,7 @@ import AppRuleError from '@/components/app/AppRuleError.vue'
 import WithdrawalAdditionalInfo from '@/components/withdrawal/WithdrawalAdditionalInfo.vue'
 import { useWalletStore } from '@/stores/wallet'
 import { storeToRefs } from 'pinia'
+import WithdrawalMaxAmountBtn from '@/components/withdrawal/WithdrawalMaxAmountBtn.vue'
 
 const walletStore = useWalletStore()
 const { walletCoin } = storeToRefs(walletStore)
@@ -38,6 +39,10 @@ const v$ = useValidate(rules, formData)
 const onSubmit = async () => {
   const result = await v$.value.$validate()
   if (result) console.log('success')
+}
+
+const setMaxAmount = () => {
+  formData.amount = walletCoin.value.total
 }
 
 const networkOptions = computed<NetworkOption[]>(() => {
@@ -79,11 +84,15 @@ const networkOptions = computed<NetworkOption[]>(() => {
       rows="2"
     />
 
-    <fieldset>
+    <fieldset class="relative">
       <app-input
         v-model.number="formData.amount"
         label="Amount"
         placeholder="Please enter amount"
+      />
+      <withdrawal-max-amount-btn
+        :coin-short-name="walletCoin.short"
+        @click="setMaxAmount"
       />
       <app-rule-error :errors="v$.amount.$errors" />
     </fieldset>

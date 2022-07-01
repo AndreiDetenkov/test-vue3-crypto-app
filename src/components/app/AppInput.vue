@@ -21,7 +21,7 @@ defineProps({
       v-bind="$attrs"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
-      class="appearance-none border rounded w-full py-2 px-3 focus:outline-none border-gray-300"
+      class="appearance-none border rounded w-full py-3 px-3 focus:outline-none border-gray-300"
     />
   </div>
 </template>

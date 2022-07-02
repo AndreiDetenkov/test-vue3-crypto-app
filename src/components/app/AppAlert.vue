@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{
+  text: string
+}>()
+</script>
 
 <template>
   <div class="flex bg-red-100 rounded-lg p-4">
@@ -15,9 +19,7 @@
       ></path>
     </svg>
     <p class="ml-3 text-sm text-red-700">
-      <span class="font-medium">Important Note!</span> Too much, bro!
+      <span class="font-medium">Important Note!</span> {{ text }}
     </p>
   </div>
 </template>
-
-<style scoped lang="scss"></style>

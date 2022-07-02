@@ -52,7 +52,7 @@ watch(
 )
 
 const setMaxAmount = (): void => {
-  formData.amount = walletCoin.value.total
+  formData.amount = walletCoin.value.total.toString()
 }
 
 const networkOptions = computed<NetworkOption[]>(() => {
@@ -91,11 +91,11 @@ const isAmountAvailable = computed<boolean>(() => {
       <withdrawal-additional-info />
     </fieldset>
 
-    <fieldset class="mb-2">
-      <app-alert v-if="!isAmountAvailable" class="mb-4" />
+    <fieldset>
+      <app-alert v-if="!isAmountAvailable" text="Too much, bro!" class="mb-4" />
       <div class="relative">
         <app-input
-          v-model.number="formData.amount"
+          v-model="formData.amount"
           label="Amount"
           :placeholder="`Minimal ${walletCoin.minimalWithdraw}`"
         />
@@ -116,12 +116,14 @@ const isAmountAvailable = computed<boolean>(() => {
       />
     </fieldset>
 
-    <button type="submit" class="submit-btn">Withdraw</button>
+    <button type="submit" class="submit-btn" :disabled="!isAmountAvailable">
+      Withdraw
+    </button>
   </form>
 </template>
 
 <style scoped>
 .submit-btn {
-  @apply bg-primary text-gray-300 font-bold p-3 rounded hover:bg-primary/90 hover:text-accent transition duration-500 ease-in-out;
+  @apply bg-primary text-gray-300 font-bold p-3 rounded hover:bg-primary/90 disabled:bg-gray-500;
 }
 </style>

@@ -15,6 +15,7 @@ import AppTextarea from '@/components/app/AppTextarea.vue'
 import AppRuleError from '@/components/app/AppRuleError.vue'
 import WithdrawalAdditionalInfo from '@/components/withdrawal/WithdrawalAdditionalInfo.vue'
 import WithdrawalMaxAmountBtn from '@/components/withdrawal/WithdrawalMaxAmountBtn.vue'
+import AppAlert from '@/components/app/AppAlert.vue'
 
 const walletStore = useWalletStore()
 const { walletCoin } = storeToRefs(walletStore)
@@ -26,13 +27,6 @@ const formData = reactive<WithdrawFormData>({
   comment: '',
 })
 
-watch(
-  () => walletCoin.value.title,
-  (newVal, prevVal) => {
-    if (newVal.toString() !== prevVal.toString()) formData.amount = ''
-  }
-)
-
 const rules = computed<FormRules>(() => {
   return {
     address: { required },
@@ -40,6 +34,26 @@ const rules = computed<FormRules>(() => {
     amount: { required },
   }
 })
+
+const v$ = useValidate(rules, formData)
+
+const onSubmit = async (): Promise<void> => {
+  const result = await v$.value.$validate()
+  if (result) console.log('success')
+}
+
+watch(
+  () => walletCoin.value.title,
+  (newVal, prevVal) => {
+    if (newVal.toString() !== prevVal.toString()) {
+      formData.amount = formData.network = formData.address = ''
+    }
+  }
+)
+
+const setMaxAmount = (): void => {
+  formData.amount = walletCoin.value.total
+}
 
 const networkOptions = computed<NetworkOption[]>(() => {
   return walletCoin.value.network.map((item) => {
@@ -50,16 +64,9 @@ const networkOptions = computed<NetworkOption[]>(() => {
   })
 })
 
-const v$ = useValidate(rules, formData)
-
-const onSubmit = async () => {
-  const result = await v$.value.$validate()
-  if (result) console.log('success')
-}
-
-const setMaxAmount = () => {
-  formData.amount = walletCoin.value.total
-}
+const isAmountAvailable = computed<boolean>(() => {
+  return formData?.amount <= walletCoin.value.available
+})
 </script>
 
 <template>
@@ -84,24 +91,29 @@ const setMaxAmount = () => {
       <withdrawal-additional-info />
     </fieldset>
 
-    <app-textarea
-      v-model="formData.comment"
-      label="Comment"
-      placeholder="Optional"
-      rows="2"
-    />
-
-    <fieldset class="relative">
-      <app-input
-        v-model.number="formData.amount"
-        label="Amount"
-        placeholder="Please enter amount"
-      />
-      <withdrawal-max-amount-btn
-        :coin-short-name="walletCoin.short"
-        @click="setMaxAmount"
-      />
+    <fieldset class="mb-2">
+      <app-alert v-if="!isAmountAvailable" class="mb-4" />
+      <div class="relative">
+        <app-input
+          v-model.number="formData.amount"
+          label="Amount"
+          :placeholder="`Minimal ${walletCoin.minimalWithdraw}`"
+        />
+        <withdrawal-max-amount-btn
+          :coin-short-name="walletCoin.short"
+          @click="setMaxAmount"
+        />
+      </div>
       <app-rule-error :errors="v$.amount.$errors" />
+    </fieldset>
+
+    <fieldset class="mb-2">
+      <app-textarea
+        v-model="formData.comment"
+        label="Comment"
+        placeholder="Optional"
+        rows="2"
+      />
     </fieldset>
 
     <button type="submit" class="submit-btn">Withdraw</button>
@@ -110,6 +122,6 @@ const setMaxAmount = () => {
 
 <style scoped>
 .submit-btn {
-  @apply bg-primary text-gray-300 font-bold py-2 px-4 rounded hover:bg-primary/90 hover:text-accent transition duration-500 ease-in-out;
+  @apply bg-primary text-gray-300 font-bold p-3 rounded hover:bg-primary/90 hover:text-accent transition duration-500 ease-in-out;
 }
 </style>

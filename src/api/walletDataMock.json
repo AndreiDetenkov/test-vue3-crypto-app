@@ -40,7 +40,7 @@
     "available": "0.00084600",
     "btcValue": "0.00000148",
     "usdValue": "0.029964",
-    "minimumWithdraw": "0.0064",
+    "minimalWithdraw": "0.0064",
     "fee": "0.0032 ~ 0.01",
     "network": [
       {

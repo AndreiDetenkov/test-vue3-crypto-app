@@ -116,7 +116,12 @@ const isAmountAvailable = computed<boolean>(() => {
       />
     </fieldset>
 
-    <button type="submit" class="submit-btn" :disabled="!isAmountAvailable">
+    <button
+      type="submit"
+      class="submit-btn"
+      :class="{ 'cursor-not-allowed': !isAmountAvailable }"
+      :disabled="!isAmountAvailable"
+    >
       Withdraw
     </button>
   </form>
@@ -124,6 +129,7 @@ const isAmountAvailable = computed<boolean>(() => {
 
 <style scoped>
 .submit-btn {
-  @apply bg-primary text-gray-300 font-bold p-3 rounded hover:bg-primary/90 disabled:bg-gray-500;
+  @apply border border-primary text-primary font-bold p-3 rounded hover:text-gray-300 hover:bg-primary/90
+         disabled:border-gray-500 disabled:bg-gray-500 disabled:text-gray-700;
 }
 </style>

@@ -12,7 +12,7 @@ export interface WalletData {
   network: NetworkData[]
 }
 
-interface NetworkData {
+export interface NetworkData {
   title: string
   value: string
   fee: string

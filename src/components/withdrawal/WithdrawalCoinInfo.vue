@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex items-center justify-between bg-gray-100 px-8 py-4 mb-12">
+  <div class="flex items-center justify-between bg-gray-100 px-8 py-4">
     <div class="flex items-center">
       <img
         :src="`${COIN_ICONS_PATH}/${coin.icon}`"

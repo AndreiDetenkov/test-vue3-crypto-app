@@ -1,17 +1,17 @@
 import { defineStore } from 'pinia'
-import type { WithdrawFormData } from '@/components/withdrawal/types'
+import type { WithdrawDetails } from '@/components/withdrawal/types'
 import { StoreId } from '@/stores/types'
 
 interface WithdrawState {
-  withdrawDetails: WithdrawFormData
+  withdrawDetails: WithdrawDetails
 }
 
 export const useWithdrawStore = defineStore(StoreId.withdraw, {
   state: (): WithdrawState => ({
-    withdrawDetails: {} as WithdrawFormData,
+    withdrawDetails: {} as WithdrawDetails,
   }),
   actions: {
-    setWithdrawDetails(payload: WithdrawFormData): void {
+    setWithdrawDetails(payload: WithdrawDetails): void {
       this.withdrawDetails = { ...payload }
     },
   },

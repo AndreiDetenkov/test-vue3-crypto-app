@@ -45,7 +45,7 @@ const v$ = useValidate(rules, formData)
 const onSubmit = async (): Promise<void> => {
   const result = await v$.value.$validate()
   if (result) {
-    await withdrawStore.setWithdrawDetails(formData)
+    await withdrawStore.setWithdrawDetails({ ...formData, coin: props.coin })
     router.push({ path: web_route.withdrawConfirmation })
   }
 }

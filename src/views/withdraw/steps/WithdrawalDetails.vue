@@ -12,6 +12,6 @@ const coin = useStorage('coin', walletCoin)
 </script>
 
 <template>
-  <withdrawal-coin-info :coin="coin" />
+  <withdrawal-coin-info :coin="coin" class="mb-12" />
   <withdrawal-form :coin="coin" />
 </template>

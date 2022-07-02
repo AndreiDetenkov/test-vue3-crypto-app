@@ -56,7 +56,7 @@ watch(
 )
 
 const setMaxAmount = (): void => {
-  formData.amount = props.coin.total.toString()
+  formData.amount = props.coin.total
 }
 
 const networkOptions = computed<NetworkOption[]>(() => {

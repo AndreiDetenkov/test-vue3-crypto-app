@@ -1,13 +1,14 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import type { WalletData } from '@/components/wallet/types'
+import { StoreId } from '@/stores/types'
 
 interface WalletState {
   walletData: WalletData[]
   walletCoin: WalletData
 }
 
-export const useWalletStore = defineStore('wallet', {
+export const useWalletStore = defineStore(StoreId.wallet, {
   state: () =>
     <WalletState>{
       walletData: [] as WalletData[],

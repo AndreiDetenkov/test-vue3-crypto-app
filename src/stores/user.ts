@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import type { UserData } from '@/components/user/types'
+import { StoreId } from '@/stores/types'
 
 interface UserState {
   userData: UserData
 }
 
-export const useUserStore = defineStore('user', {
+export const useUserStore = defineStore(StoreId.user, {
   state: (): UserState => ({
     userData: {} as UserData,
   }),

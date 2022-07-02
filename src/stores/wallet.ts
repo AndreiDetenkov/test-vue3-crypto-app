@@ -16,7 +16,7 @@ export const useWalletStore = defineStore('wallet', {
   actions: {
     async fetchWalletData(): Promise<void> {
       try {
-        const { data } = await axios.get('src/api/walletDataMock.json')
+        const { data } = await axios.get('walletDataMock.json')
         if (data) this.walletData = data
       } catch (err) {
         throw new Error()

@@ -1,0 +1,9 @@
+{
+  "userName": "John Dow",
+  "email": "john.dow@email.com",
+  "balance": {
+    "value": "0.00174923",
+    "currency": "BTC",
+    "usd": "35.07"
+  }
+}

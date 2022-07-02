@@ -1,1 +1,1 @@
-export const COIN_ICONS_PATH = 'src/assets/icons/coins'
+export const COIN_ICONS_PATH = '/icons/coins'

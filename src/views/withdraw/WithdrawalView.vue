@@ -1,21 +1,16 @@
 <script setup lang="ts">
 import { onBeforeMount } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useStorage } from '@vueuse/core'
 import { useWalletStore } from '@/stores/wallet'
 import AppPageTitle from '@/components/app/AppPageTitle.vue'
 import WithdrawalList from '@/components/withdrawal/WithdrawalList.vue'
-import WithdrawalCoinInfo from '@/components/withdrawal/WithdrawalCoinInfo.vue'
-import WithdrawalForm from '@/components/withdrawal/WithdrawalForm.vue'
 
 onBeforeMount((): void => {
   walletStore.fetchWalletData()
 })
 
 const walletStore = useWalletStore()
-const { walletCoin, walletData } = storeToRefs(walletStore)
-
-const coin = useStorage('coin', walletCoin)
+const { walletData } = storeToRefs(walletStore)
 </script>
 
 <template>
@@ -28,9 +23,7 @@ const coin = useStorage('coin', walletCoin)
       </aside>
 
       <section class="flex-1 border p-6">
-        <withdrawal-coin-info :coin="coin" />
-
-        <withdrawal-form class="max-w-screen-xl w-2/4 mx-auto" />
+        <router-view />
       </section>
     </div>
   </section>

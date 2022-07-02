@@ -13,7 +13,7 @@ export const useUserStore = defineStore('user', {
   actions: {
     async fetchUserData(): Promise<void> {
       try {
-        const { data } = await axios.get('src/api/userDataMock.json')
+        const { data } = await axios.get('userDataMock.json')
         if (data) this.userData = data
       } catch (error) {
         throw new Error()

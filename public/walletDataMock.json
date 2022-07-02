@@ -18,13 +18,13 @@
         "usdFee": "0.290000"
       },
       {
-        "title": "BNB Beacon Chain (BEP2) - 1",
+        "title": "BNB Beacon Chain (BEP2)",
         "value": "0036d706-407a-4536-8e17-7daf84c6d992",
         "fee": "1",
         "usdFee": "1.000000"
       },
       {
-        "title": "Ethereum (ERC20) - 4",
+        "title": "Ethereum (ERC20)",
         "value": "0036d706-407a-4536-8e17-7daf84c6d993",
         "fee": "4",
         "usdFee": "4.00"

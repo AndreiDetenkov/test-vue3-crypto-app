@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import router from '@/router'
 import { computed, reactive, watch } from 'vue'
-import { storeToRefs } from 'pinia'
 import { required } from '@vuelidate/validators'
 import useValidate from '@vuelidate/core'
-import { useWalletStore } from '@/stores/wallet'
 import type {
   FormRules,
   NetworkOption,
@@ -16,9 +15,12 @@ import AppRuleError from '@/components/app/AppRuleError.vue'
 import WithdrawalAdditionalInfo from '@/components/withdrawal/WithdrawalAdditionalInfo.vue'
 import WithdrawalMaxAmountBtn from '@/components/withdrawal/WithdrawalMaxAmountBtn.vue'
 import AppAlert from '@/components/app/AppAlert.vue'
+import { web_route } from '@/utils/webConfig'
+import type { WalletData } from '@/components/wallet/types'
 
-const walletStore = useWalletStore()
-const { walletCoin } = storeToRefs(walletStore)
+const props = defineProps<{
+  coin: WalletData
+}>()
 
 const formData = reactive<WithdrawFormData>({
   address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
@@ -39,11 +41,13 @@ const v$ = useValidate(rules, formData)
 
 const onSubmit = async (): Promise<void> => {
   const result = await v$.value.$validate()
-  if (result) console.log('success')
+  if (result) {
+    router.push({ path: web_route.withdrawConfirmation }).catch(() => {})
+  }
 }
 
 watch(
-  () => walletCoin.value.title,
+  () => props.coin.title,
   (newVal, prevVal) => {
     if (newVal.toString() !== prevVal.toString()) {
       formData.amount = formData.network = formData.address = ''
@@ -52,11 +56,11 @@ watch(
 )
 
 const setMaxAmount = (): void => {
-  formData.amount = walletCoin.value.total.toString()
+  formData.amount = props.coin.total.toString()
 }
 
 const networkOptions = computed<NetworkOption[]>(() => {
-  return walletCoin.value.network.map((item) => {
+  return props.coin.network.map((item) => {
     return {
       value: item.value,
       title: item.title + ` - fee: ${item.fee} ( ≈ $${item.usdFee})`,
@@ -65,7 +69,7 @@ const networkOptions = computed<NetworkOption[]>(() => {
 })
 
 const isAmountAvailable = computed<boolean>(() => {
-  return formData?.amount <= walletCoin.value.available
+  return formData?.amount <= props.coin.available
 })
 </script>
 
@@ -97,10 +101,10 @@ const isAmountAvailable = computed<boolean>(() => {
         <app-input
           v-model="formData.amount"
           label="Amount"
-          :placeholder="`Minimal ${walletCoin.minimalWithdraw}`"
+          :placeholder="`Minimal ${coin.minimalWithdraw}`"
         />
         <withdrawal-max-amount-btn
-          :coin-short-name="walletCoin.short"
+          :coin-short-name="coin.short"
           @click="setMaxAmount"
         />
       </div>
@@ -129,7 +133,7 @@ const isAmountAvailable = computed<boolean>(() => {
 
 <style scoped>
 .submit-btn {
-  @apply border border-primary text-primary font-bold p-3 rounded hover:text-gray-300 hover:bg-primary/90
+  @apply border border-primary text-primary font-bold p-3 rounded hover:text-gray-300 hover:bg-primary
          disabled:border-gray-500 disabled:bg-gray-500 disabled:text-gray-700;
 }
 </style>

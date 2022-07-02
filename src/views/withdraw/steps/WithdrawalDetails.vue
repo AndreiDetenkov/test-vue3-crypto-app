@@ -13,5 +13,5 @@ const coin = useStorage('coin', walletCoin)
 
 <template>
   <withdrawal-coin-info :coin="coin" />
-  <withdrawal-form :coin="coin" class="max-w-screen-xl w-2/4 mx-auto" />
+  <withdrawal-form :coin="coin" />
 </template>

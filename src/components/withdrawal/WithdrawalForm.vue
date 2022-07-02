@@ -78,7 +78,10 @@ const isAmountAvailable = computed<boolean>(() => {
 </script>
 
 <template>
-  <form @submit.prevent="onSubmit" class="flex flex-col gap-6">
+  <form
+    @submit.prevent="onSubmit"
+    class="flex flex-col gap-6 sm:w-full lg:w-3/4 xl:w-2/4 mx-auto"
+  >
     <fieldset>
       <app-input
         v-model="formData.address"
@@ -137,7 +140,7 @@ const isAmountAvailable = computed<boolean>(() => {
 
 <style scoped>
 .submit-btn {
-  @apply border border-primary text-primary font-bold p-3 rounded hover:text-gray-300 hover:bg-primary
+  @apply bg-primary text-gray-300 font-bold p-3 rounded hover:bg-primary/90
          disabled:border-gray-500 disabled:bg-gray-500 disabled:text-gray-700;
 }
 </style>

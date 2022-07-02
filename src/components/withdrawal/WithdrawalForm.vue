@@ -46,7 +46,7 @@ const onSubmit = async (): Promise<void> => {
   const result = await v$.value.$validate()
   if (result) {
     await withdrawStore.setWithdrawDetails(formData)
-    router.push({ path: web_route.withdrawConfirmation }).catch(() => {})
+    router.push({ path: web_route.withdrawConfirmation })
   }
 }
 

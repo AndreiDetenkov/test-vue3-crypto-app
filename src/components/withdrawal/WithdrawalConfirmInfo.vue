@@ -9,7 +9,7 @@ const withdrawStore = useWithdrawStore()
 const { withdrawDetails } = storeToRefs(withdrawStore)
 
 const networkDetails = computed<NetworkData>(() => {
-  return withdrawDetails.value.coin.network.find(
+  return withdrawDetails.value?.coin?.network.find(
     (item) => item.value === withdrawDetails.value.network
   )
 })
@@ -26,14 +26,14 @@ const listInfo = computed(() => {
   return [
     {
       title: 'Amount',
-      img: `${COIN_ICONS_PATH}/${withdrawDetails.value.coin.icon}`,
+      img: `${COIN_ICONS_PATH}/${withdrawDetails.value?.coin?.icon}`,
       value: amountInfo,
     },
-    { title: 'Address', value: withdrawDetails.value.address },
-    { title: 'Network', value: networkDetails.value.title },
+    { title: 'Address', value: withdrawDetails.value?.address },
+    { title: 'Network', value: networkDetails.value?.title },
     {
       title: 'Comment',
-      value: withdrawDetails.value.comment || "there aren't any comments...",
+      value: withdrawDetails.value?.comment || "there aren't any comments...",
     },
   ]
 })
@@ -50,7 +50,6 @@ const listInfo = computed(() => {
         <img
           v-if="item.img"
           :src="item.img"
-          alt="coin icon"
           class="w-5 h-5 mr-1 inline-block"
         />
         <span class="font-medium">{{ item.value }}</span>

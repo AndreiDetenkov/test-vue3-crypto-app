@@ -3,6 +3,7 @@ import router from '@/router'
 import { computed, reactive, watch } from 'vue'
 import { required } from '@vuelidate/validators'
 import useValidate from '@vuelidate/core'
+import { useWithdrawStore } from '@/stores/withdraw'
 import type {
   FormRules,
   NetworkOption,
@@ -17,6 +18,8 @@ import WithdrawalMaxAmountBtn from '@/components/withdrawal/WithdrawalMaxAmountB
 import AppAlert from '@/components/app/AppAlert.vue'
 import { web_route } from '@/utils/webConfig'
 import type { WalletData } from '@/components/wallet/types'
+
+const withdrawStore = useWithdrawStore()
 
 const props = defineProps<{
   coin: WalletData
@@ -42,6 +45,7 @@ const v$ = useValidate(rules, formData)
 const onSubmit = async (): Promise<void> => {
   const result = await v$.value.$validate()
   if (result) {
+    await withdrawStore.setWithdrawDetails(formData)
     router.push({ path: web_route.withdrawConfirmation }).catch(() => {})
   }
 }

@@ -4,6 +4,7 @@ import { TABLE_HEADERS } from '@/components/wallet/utils'
 import { web_route } from '@/utils/webConfig'
 import type { WalletData } from '@/components/wallet/types'
 import useCoin from '@/composables/useCoin'
+import AppTable from '@/components/app/AppTable.vue'
 
 defineProps<{
   tableItems: WalletData[]
@@ -13,15 +14,16 @@ const { setCoin } = useCoin()
 </script>
 
 <template>
-  <table class="table">
-    <thead class="table__header">
+  <app-table>
+    <template #table-header>
       <tr class="header-row">
         <th v-for="header in TABLE_HEADERS" :key="header" class="header-col">
           {{ header }}
         </th>
       </tr>
-    </thead>
-    <tbody>
+    </template>
+
+    <template #table-body>
       <tr v-for="item in tableItems" :key="item.id" class="body-row">
         <td class="col-first">
           <img
@@ -53,19 +55,11 @@ const { setCoin } = useCoin()
           </router-link>
         </td>
       </tr>
-    </tbody>
-  </table>
+    </template>
+  </app-table>
 </template>
 
 <style scoped lang="scss">
-.table {
-  @apply w-full table-fixed border-collapse;
-
-  &__header {
-    @apply bg-gray-100;
-  }
-}
-
 .header {
   &-row {
     @apply h-11;

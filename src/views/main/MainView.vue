@@ -40,10 +40,6 @@ onBeforeMount(() => {
           class="border-b h-14 hover:bg-gray-100"
         >
           <td class="px-4 flex items-center h-14">
-            <img
-              :src="`${COIN_ICONS_PATH}/${pair.primary.toLowerCase()}.svg`"
-              class="w-6 h-6 mr-4"
-            />
             <span class="uppercase">{{ pair.primary }}</span>
           </td>
           <td>$ {{ price.last }}</td>

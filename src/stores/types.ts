@@ -3,4 +3,5 @@ export enum StoreId {
   wallet = 'wallet',
   withdraw = 'withdraw',
   history = 'history',
+  market = 'market',
 }

@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="fixed inset-0 z-50 bg-default/80 flex justify-center items-center w-screen h-screen"
+    class="fixed inset-0 z-50 bg-default flex justify-center items-center w-screen h-screen"
   >
     <svg width="100" height="100" viewBox="0 0 300 300">
       <defs>

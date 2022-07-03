@@ -3,6 +3,7 @@ import { onBeforeMount } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMarketStore } from '@/stores/markets'
 import { TABLE_HEADERS } from '@/components/main/utils'
+import { COIN_ICONS_PATH } from '@/utils/consts'
 import AppPageTitle from '@/components/app/AppPageTitle.vue'
 import AppTable from '@/components/app/AppTable.vue'
 import AppLoader from '@/components/app/AppLoader.vue'
@@ -38,10 +39,24 @@ onBeforeMount(() => {
           :key="index.toString()"
           class="border-b h-14 hover:bg-gray-100"
         >
-          <td>{{ pair.primary }}</td>
-          <td>{{ price.last }}</td>
-          <td>{{ price.change?.percent }}</td>
-          <td>{{ volume.primary }}</td>
+          <td class="px-4 flex items-center h-14">
+            <img
+              :src="`${COIN_ICONS_PATH}/${pair.primary.toLowerCase()}.svg`"
+              class="w-6 h-6 mr-4"
+            />
+            <span class="uppercase">{{ pair.primary }}</span>
+          </td>
+          <td>$ {{ price.last }}</td>
+          <td
+            class="font-medium"
+            :class="{
+              'text-red-700': price.change.direction === 'Up',
+              'text-green-700': price.change.direction === 'Down',
+            }"
+          >
+            {{ price.change?.percent }} %
+          </td>
+          <td>{{ volume.primary }} USD</td>
         </tr>
       </template>
     </app-table>

@@ -42,6 +42,7 @@ defineProps<{
           <span
             class="font-medium"
             :class="{
+              'text-red-600': item.status === OrderStatus.Rejected,
               'text-green-600': item.status === OrderStatus.Completed,
               'text-orange-600': item.status === OrderStatus.Pending,
             }"

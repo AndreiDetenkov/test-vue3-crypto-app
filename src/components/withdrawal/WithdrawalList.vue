@@ -33,7 +33,7 @@ const availableCoins = computed<WalletData[]>(() => {
     <div class="pl-4">
       <span class="font-bold uppercase">{{ data.short }}</span> |
       <span>{{ data.title }}</span>
-      <div class="font-medium text-gray-500">
+      <div class="font-medium text-gray-500 text-sm">
         Total: <span>{{ data.total }}</span>
       </div>
     </div>

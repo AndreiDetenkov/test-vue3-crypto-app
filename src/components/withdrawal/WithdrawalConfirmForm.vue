@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive } from 'vue'
 import useValidate from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
+import { maxLength, minLength, required } from '@vuelidate/validators'
 import type { ConfirmFormData, FormRules } from '@/components/withdrawal/types'
 import { web_route } from '@/utils/webConfig'
-import { HELPER_TEXT_VISIBLE_TIMEOUT } from '@/utils/consts'
 import { useWithdrawStore } from '@/stores/withdraw'
 import AppRuleError from '@/components/app/AppRuleError.vue'
 import AppInput from '@/components/app/AppInput.vue'
+import useCode from '@/composables/useCode'
 
 const emit = defineEmits<{
   (e: 'completed'): void
@@ -21,7 +21,7 @@ const formData = reactive<ConfirmFormData>({
 const rules = computed<FormRules>(() => {
   return {
     password: { required },
-    phoneCode: { required },
+    phoneCode: { required, minLength: minLength(6), maxLength: maxLength(6) },
   }
 })
 const v$ = useValidate(rules, formData)
@@ -36,15 +36,7 @@ const onSubmit = async (): Promise<void> => {
   }
 }
 
-const isCodeSend = ref<boolean>(false)
-const getCode = () => {
-  isCodeSend.value = true
-  const timeout = setTimeout(() => {
-    isCodeSend.value = false
-    formData.phoneCode = '000000'
-    clearTimeout(timeout)
-  }, HELPER_TEXT_VISIBLE_TIMEOUT)
-}
+const { getCode, isCodeSend } = useCode()
 </script>
 
 <template>

@@ -30,6 +30,7 @@ const onSubmit = async (): Promise<void> => {
   const result = await v$.value.$validate()
   if (result) {
     const withdrawStore = useWithdrawStore()
+    // send data to the server
     const response = await withdrawStore.sendWithdrawalData(formData)
     if (response) emit('completed')
   }

@@ -4,4 +4,5 @@ export enum web_route {
   withdraw = '/withdraw',
   withdrawConfirmation = '/withdraw/confirmation',
   withdrawResult = '/withdraw/result',
+  history = '/history',
 }

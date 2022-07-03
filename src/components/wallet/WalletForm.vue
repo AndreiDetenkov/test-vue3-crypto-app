@@ -29,7 +29,9 @@ const filteredWalletData = computed<WalletData[]>(() => {
       class="search-input"
     />
 
-    <wallet-table :table-items="filteredWalletData" />
+    <div class="overflow-x-auto shadow rounded-lg">
+      <wallet-table :table-items="filteredWalletData" />
+    </div>
   </form>
 </template>
 

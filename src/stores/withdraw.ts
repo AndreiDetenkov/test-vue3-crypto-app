@@ -1,5 +1,8 @@
 import { defineStore } from 'pinia'
-import type { WithdrawDetails } from '@/components/withdrawal/types'
+import type {
+  ConfirmFormData,
+  WithdrawDetails,
+} from '@/components/withdrawal/types'
 import { StoreId } from '@/stores/types'
 
 interface WithdrawState {
@@ -13,6 +16,15 @@ export const useWithdrawStore = defineStore(StoreId.withdraw, {
   actions: {
     setWithdrawDetails(payload: WithdrawDetails): void {
       this.withdrawDetails = { ...payload }
+    },
+    async sendWithdrawalData(formData: ConfirmFormData): Promise<boolean> {
+      // const payload = {
+      //   withdrawDetails: this.withdrawDetails,
+      //   withdrawConfirmDetails: formData,
+      // }
+      // const result = await axios.post('/serverUrl', payload)
+
+      return true
     },
   },
 })

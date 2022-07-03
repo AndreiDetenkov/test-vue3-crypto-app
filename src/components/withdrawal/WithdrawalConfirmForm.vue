@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
-import router from '@/router'
 import useValidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
-import type { FormRules } from '@/components/withdrawal/types'
+import type { ConfirmFormData, FormRules } from '@/components/withdrawal/types'
 import { web_route } from '@/utils/webConfig'
-import AppInput from '@/components/app/AppInput.vue'
-import AppRuleError from '@/components/app/AppRuleError.vue'
 import { HELPER_TEXT_VISIBLE_TIMEOUT } from '@/utils/consts'
+import { useWithdrawStore } from '@/stores/withdraw'
+import AppRuleError from '@/components/app/AppRuleError.vue'
+import AppInput from '@/components/app/AppInput.vue'
 
-const formData = reactive({
+const emit = defineEmits<{
+  (e: 'completed'): void
+}>()
+
+const formData = reactive<ConfirmFormData>({
   password: '',
   phoneCode: '',
 })
@@ -25,7 +29,9 @@ const v$ = useValidate(rules, formData)
 const onSubmit = async (): Promise<void> => {
   const result = await v$.value.$validate()
   if (result) {
-    console.log(result)
+    const withdrawStore = useWithdrawStore()
+    const response = await withdrawStore.sendWithdrawalData(formData)
+    if (response) emit('completed')
   }
 }
 

@@ -21,18 +21,12 @@ const router = createRouter({
       children: [
         {
           path: '',
-          component: () =>
-            import('@/views/withdraw/steps/WithdrawalDetails.vue'),
+          component: () => import('@/views/withdraw/WithdrawalDetails.vue'),
         },
         {
           path: 'confirmation',
           component: () =>
-            import('@/views/withdraw/steps/WithdrawalConfirmation.vue'),
-        },
-        {
-          path: 'result',
-          component: () =>
-            import('@/views/withdraw/steps/WithdrawalResult.vue'),
+            import('@/views/withdraw/WithdrawalConfirmation.vue'),
         },
       ],
     },

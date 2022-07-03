@@ -1,3 +1,3 @@
 export const COIN_ICONS_PATH = '/icons/coins'
 
-export const HELPER_TEXT_VISIBLE_TIMEOUT = 5000
+export const HELPER_TEXT_VISIBLE_TIMEOUT = 3000

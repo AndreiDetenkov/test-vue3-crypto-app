@@ -16,3 +16,8 @@ export interface NetworkOption {
   title: string
   value: string
 }
+
+export interface ConfirmFormData {
+  password: string
+  phoneCode: string
+}

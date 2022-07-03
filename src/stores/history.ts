@@ -1,23 +1,22 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import type { WalletData } from '@/components/wallet/types'
 import { StoreId } from '@/stores/types'
 import { FETCH_DATA_TIMEOUT } from '@/utils/consts'
+import type { HistoryData } from '@/components/history/types'
 
-export const useWalletStore = defineStore(StoreId.wallet, {
+export const useHistoryStore = defineStore(StoreId.history, {
   state: () => ({
     isLoading: true,
-    walletData: [] as WalletData[],
-    walletCoin: {} as WalletData,
+    historyData: [] as HistoryData[],
   }),
   actions: {
-    fetchWalletData(): void {
+    fetchHistoryData(): void {
       try {
         this.isLoading = true
         const timeout = setTimeout(async () => {
-          const { data } = await axios.get('walletDataMock.json')
+          const { data } = await axios.get('historyDataMock.json')
           if (data) {
-            this.walletData = data
+            this.historyData = data
             clearTimeout(timeout)
             this.isLoading = false
           }
@@ -25,9 +24,6 @@ export const useWalletStore = defineStore(StoreId.wallet, {
       } catch (err) {
         throw new Error()
       }
-    },
-    setWalletCoin(coin: WalletData): void {
-      this.walletCoin = coin
     },
   },
 })

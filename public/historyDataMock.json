@@ -1,0 +1,20 @@
+[
+  {
+    "id": "12",
+    "asset": "Sol",
+    "icon": "sol.svg",
+    "dateTime": "2022-07-01 14:52",
+    "type": "Withdraw",
+    "amount": "0.00084600",
+    "status": "Completed"
+  },
+  {
+    "id": "12",
+    "asset": "Eth",
+    "icon": "eth.svg",
+    "dateTime": "2022-07-03 11:19",
+    "type": "Withdraw",
+    "amount": "0.00000358",
+    "status": "Pending"
+  }
+]

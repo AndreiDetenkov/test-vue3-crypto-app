@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="overflow-x-auto shadow rounded-lg">
+  <div class="overflow-x-auto rounded-lg">
     <table class="w-full table-fixed border-collapse">
       <thead class="bg-gray-100">
         <slot name="table-header" />

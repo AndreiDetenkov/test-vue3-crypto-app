@@ -11,6 +11,6 @@ describe('Alert', () => {
         text: mockText,
       },
     })
-    expect(wrapper.html()).toContain(mockText)
+    expect(wrapper.html()).contain(mockText)
   })
 })

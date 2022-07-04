@@ -9,7 +9,7 @@ import type {
   NetworkOption,
   WithdrawFormData,
 } from '@/components/withdrawal/types'
-import AppInput from '@/components/app/AppInput.vue'
+import AppInput from '@/components/app/input/AppInput.vue'
 import AppSelect from '@/components/app/AppSelect.vue'
 import AppTextarea from '@/components/app/AppTextarea.vue'
 import AppRuleError from '@/components/app/AppRuleError.vue'

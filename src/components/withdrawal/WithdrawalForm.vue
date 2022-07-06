@@ -9,13 +9,13 @@ import type {
   NetworkOption,
   WithdrawFormData,
 } from '@/components/withdrawal/types'
-import AppInput from '@/components/app/AppInput.vue'
+import AppInput from '@/components/app/input/AppInput.vue'
 import AppSelect from '@/components/app/AppSelect.vue'
 import AppTextarea from '@/components/app/AppTextarea.vue'
 import AppRuleError from '@/components/app/AppRuleError.vue'
 import WithdrawalAdditionalInfo from '@/components/withdrawal/WithdrawalAdditionalInfo.vue'
 import WithdrawalMaxAmountBtn from '@/components/withdrawal/WithdrawalMaxAmountBtn.vue'
-import AppAlert from '@/components/app/AppAlert.vue'
+import AppAlert from '@/components/app/alert/AppAlert.vue'
 import { web_route } from '@/utils/webConfig'
 import type { WalletData } from '@/components/wallet/types'
 

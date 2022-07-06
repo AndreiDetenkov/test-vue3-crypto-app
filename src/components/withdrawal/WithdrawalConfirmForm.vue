@@ -6,7 +6,7 @@ import type { ConfirmFormData, FormRules } from '@/components/withdrawal/types'
 import { web_route } from '@/utils/webConfig'
 import { useWithdrawStore } from '@/stores/withdraw'
 import AppRuleError from '@/components/app/AppRuleError.vue'
-import AppInput from '@/components/app/AppInput.vue'
+import AppInput from '@/components/app/input/AppInput.vue'
 import useCode from '@/composables/useCode'
 
 const emit = defineEmits<{

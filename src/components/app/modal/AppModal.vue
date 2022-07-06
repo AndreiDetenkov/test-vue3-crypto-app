@@ -11,15 +11,17 @@ const emit = defineEmits<{
 <template>
   <div
     v-if="modelValue"
+    data-test="modal"
     class="fixed inset-0 z-50 bg-black/60 flex justify-center items-center w-screen h-screen"
   >
     <div class="w-full max-w-lg h-auto bg-white rounded-lg shadow">
       <div class="flex justify-between items-start px-6 pt-4">
-        <h3 class="font-medium text-gray-700">
+        <h3 class="font-medium text-gray-700" data-test="modal_header">
           <slot name="header" />
         </h3>
         <button
           type="button"
+          data-test="close_btn"
           @click="emit('update:modelValue', false)"
           class="text-gray-700 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
         >
@@ -38,13 +40,14 @@ const emit = defineEmits<{
         </button>
       </div>
 
-      <div class="p-6">
-        <p class="text-base leading-relaxed">
-          <slot name="content" />
-        </p>
+      <div class="p-6 text-base leading-relaxed" data-test="modal_content">
+        <slot name="content" />
       </div>
 
-      <div class="flex items-center justify-center p-6 space-x-2">
+      <div
+        class="flex items-center justify-center p-6 space-x-2"
+        data-test="modal_action"
+      >
         <slot name="action" />
       </div>
     </div>

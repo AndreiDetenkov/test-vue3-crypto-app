@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { web_route } from '@/utils/webConfig'
 import WithdrawalConfirmInfo from '@/components/withdrawal/WithdrawalConfirmInfo.vue'
 import WithdrawalConfirmForm from '@/components/withdrawal/WithdrawalConfirmForm.vue'
-import AppModal from '@/components/app/AppModal.vue'
+import AppModal from '@/components/app/modal/AppModal.vue'
 
 const isModalDisplay = ref<boolean>(false)
 </script>

@@ -18,7 +18,7 @@ defineProps<{
         clip-rule="evenodd"
       ></path>
     </svg>
-    <p class="ml-3 text-sm text-red-700">
+    <p class="ml-3 text-sm text-red-700" data-test="alert_text">
       <span class="font-medium">Important Note!</span> {{ text }}
     </p>
   </div>
